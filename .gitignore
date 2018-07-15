@@ -38,3 +38,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# code workspace files
+*.code-workspace
