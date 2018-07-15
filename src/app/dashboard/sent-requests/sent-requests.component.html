@@ -1,0 +1,158 @@
+<div class="container-fluid content">
+
+    <!-- Pending -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-holder">
+          <div class="heading-caption">Pending</div>
+          <table class="table-requests">
+            <thead>
+              <tr>
+                <th class="size-catcher">Catcher:</th>
+                <th class="size-vin">Vin:</th>
+                <th class="size-sent">Sent:</th>
+                <th class="size-accepted"> </th>
+                <th class="size-finished"> </th>
+                <th class="size-delete"> </th>
+                <th class="size-edit"> </th>
+                <th class="size-download"> </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let request of this.pendingRequests" class="tr">
+                  <td class="size-catcher"><div class="td-content">{{request.catcherName}}</div></td>
+                  <td class="size-vin"><div class="td-content">{{request.vin}}</div></td>
+                  <td class="size-sent">
+                    <div class="td-content">
+                      <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+                      <br>
+                      {{request.createdAt.substr(11,5)}}
+                    </div>
+                  </td>
+                  <td class="size-accepted">{{request.acceptedTime}}</td>
+                  <td class="size-finished">{{request.finishTime}}</td>
+                  <td class="size-delete"> </td>
+                  <td class="size-edit"> </td>
+                  <td class="size-download"> </td>
+              </tr>
+            </tbody>
+              
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <br> 
+
+    <!-- In Progress -->
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="table-holder">
+            <div class="heading-caption">In Progress</div>
+            <table class="table-requests">
+              <thead>
+                <tr>
+                  <th class="size-catcher">Catcher:</th>
+                  <th class="size-vin">Vin:</th>
+                  <th class="size-sent">Sent:</th>
+                  <th class="size-accepted">Accepted:</th>
+                  <th class="size-finished"> </th>
+                  <th class="size-delete"> </th>
+                  <th class="size-edit"> </th>
+                  <th class="size-download"> </th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let request of this.inProgressRequests" class="tr">
+                  <td class="size-catcher"><div class="td-content">{{request.catcherName}}</div></td>
+                  <td class="size-vin"><div class="td-content">{{request.vin}}</div></td>
+                  <td class="size-sent">
+                    <div class="td-content">
+                      <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+                      <br>
+                      {{request.createdAt.substr(11,5)}}
+                    </div>
+                  </td>
+                  <td class="size-accepted">{{request.acceptedTime}}</td>
+                  <td class="size-finished">{{request.finishTime}}</td>
+                  <td class="size-delete"> </td>
+                  <td class="size-edit"> </td>
+                  <td class="size-download"> </td>
+                </tr>
+              </tbody>
+                
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <br> 
+    
+    <!-- Finished -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-holder">
+          <div class="heading-caption">Finished</div>
+          <table class="table-requests">
+            <thead>
+              <tr>
+                <th class="size-catcher">Catcher:</th>
+                <th class="size-vin">Vin:</th>
+                <th class="size-sent">Sent:</th>
+                <th class="size-accepted">Accepted:</th>
+                <th class="size-finished">Finished:</th>
+                <th class="size-delete"> </th>
+                <th class="size-edit"> </th>
+                <th class="size-download"> </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let request of this.finishedRequests" class="tr">
+                <td class="size-catcher"><div class="td-content">{{request.catcherName}}</div></td>
+                <td class="size-vin"><div class="td-content">{{request.vin}}</div></td>
+                <td class="size-sent">
+                  <div class="td-content">
+                    <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+                    <br>
+                    {{request.createdAt.substr(11,5)}}
+                  </div>
+                </td>
+                <td class="size-accepted">{{request.acceptedTime}}</td>
+                <td class="size-finished">{{request.finishTime}}</td>
+                <td class="size-delete"><button type="button" class="button-delete" (click)="deleteRequest(request.id)"></button></td>
+                <td class="size-edit"><button type="button" class="button-edit" (click)="editImages(request.id)"></button></td>
+                <td class="size-download"><button type="button" class="button-download" (click)="downloadImages(request.id)"></button></td>
+              </tr>
+
+            </tbody>
+              
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+// Change the selector if needed
+var $table = $('table'),
+    $bodyCells = $table.find('tbody tr:first').children(),
+    colWidth;
+
+// Adjust the width of thead cells when window resizes
+$(window).resize(function() {
+    // Get the tbody columns width array
+    colWidth = $bodyCells.map(function() {
+        return $(this).width();
+    }).get();
+    
+    // Set the width of thead columns
+    $table.find('thead tr').children().each(function(i, v) {
+        $(v).width(colWidth[i]);
+    });    
+}).resize(); // Trigger resize handler
+</script>

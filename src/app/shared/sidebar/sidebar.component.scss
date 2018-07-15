@@ -1,0 +1,47 @@
+.color-text-primary {
+    color: #a1a1a5 !important;
+}
+
+.bg-primary-catch {
+    background-color: #fcfcfc !important;
+}
+
+.brand-link-catch {
+    border-bottom: none;
+    margin-top: 20px;
+}
+
+.catch-img{
+    margin-bottom: 30px;
+    border: none;
+}
+
+.text-dashboard {
+    font-size: 1.5rem;
+}
+
+
+.catch-img-text {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-image: url("../../../assets/img/catch_text.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80%;
+    height: 36px;
+}
+
+.bottom-sidebar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.active-item {
+    background-color: #ebebec;
+    border-bottom: 2px solid #ff2e55;
+    border-radius: 0;
+}
+
+a.nav-link {
+    cursor: pointer;
+}

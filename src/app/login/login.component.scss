@@ -1,0 +1,42 @@
+.login-page-custom {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    text-align: center;
+    color: #fff;
+    padding: 3em;
+}
+
+.login-page-custom .input-underline {
+    background: 0 0;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    color: #FFF;
+    border-radius: 0;
+}
+.login-page-custom .rounded-btn:hover, .login-page-custom .rounded-btn:focus, .login-page-custom .rounded-btn:active, .login-page-custom .rounded-btn:visited {
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    outline: none;
+}
+.login-page-custom .rounded-btn {
+    border-radius: 50px;
+    color: #e6d8d8d8;
+    background: #ff0944;
+    border: 2px solid #ff0944;
+    font-size: 18px;
+    line-height: 40px;
+    padding: 0 25px;
+}
+
+.login-page-custom .form-content {
+    padding: 40px 0;
+}
+
+.form-content-custom .form-group {
+    margin: 30px 0;
+}

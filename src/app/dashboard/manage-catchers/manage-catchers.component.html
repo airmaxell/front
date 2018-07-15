@@ -1,0 +1,189 @@
+<div class="container-fluid content">
+
+  <simple-notifications [options]="notificationOptions"></simple-notifications>
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-sm-8 offset-sm-2">
+        <div class="form-group ">
+          <button type="button" class="form-control button-submit"
+            (click)="showDialogAddCatcher(dialogAddCatcher)">
+            NEW CATCHER
+          </button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal Form ADD CATCHER -->
+  <ng-template #dialogAddCatcher let-c="close" let-d="dismiss" >
+    <div class="modal-header">
+      <h4 class="modal-title">Add Catcher</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #catcherForm="ngForm" (ngSubmit)="addCatcher(catcherForm, dialogAddCatcher)" class="form">
+        <!-- Catcher Full Name -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12 ">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="name" name="name" placeholder="Enter full name" [(ngModel)]="name">
+              </div>
+          </div>
+        </div>
+        
+        <!-- Catcher email -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 ">
+              <div class="form-group">
+                <input type="email" autocomplete="off" class="form-control fc-input" id="email" name="email" placeholder="Enter email" [(ngModel)]="email">
+              </div>
+          </div>
+        </div>
+    
+        <!-- Catcher password -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 ">
+              <div class="form-group">
+                <input type="password" autocomplete="off" class="form-control fc-input" id="password" name="password" placeholder="Enter password" [(ngModel)]="password">
+              </div>
+          </div>
+        </div>
+    
+        <br>
+    
+        <div class="row">
+            <div class="col-lg-12 col-md-12 ">
+              <div class="form-group ">
+                <button type="submit" class="form-control button-submit">ADD CATCHER</button>
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+  
+  <!-- Table of Catchers -->
+  <div class="row">
+    <div class="col-lg-12 catchersTable">
+      <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <input (keyup)="applyFilter($event.target.value)" placeholder="Filter" type="text" autocomplete="off" class="form-control fc-input filter">
+        </div>
+      </div>  
+        <mat-table class="lessons-table mat-elevation-z8 table-condensed table-catchers" [dataSource]="catchersData">
+            <ng-container matColumnDef="name" >
+                <mat-header-cell *matHeaderCellDef style="min-width: 20%;"  mat-sort>Catcher full name</mat-header-cell>
+                <mat-cell *matCellDef="let catcher" style="min-width: 20%;">{{catcher.name}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef style="min-width: 25%;" mat-sort>Catcher email address</mat-header-cell>
+                <mat-cell *matCellDef="let catcher" style="min-width: 25%;">{{catcher.email}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="requestCount">
+                <mat-header-cell *matHeaderCellDef style="min-width: 20%;" mat-sort>Responded requests</mat-header-cell>
+                <mat-cell *matCellDef="let catcher" style="min-width: 20%;">155</mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="averageTime">
+                <mat-header-cell *matHeaderCellDef style="min-width: 20%;" mat-sort>Average response time</mat-header-cell>
+                <mat-cell *matCellDef="let catcher" style="min-width: 20%;">10:15</mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="editCatcher">
+                <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+                <mat-cell class="duration-cell" *matCellDef="let catcher" (click)="$event.stopPropagation()">
+                  <button type="button" class="button-edit" (click)="showDialogEditCatcher(dialogEditCatcher,catcher)">
+                      <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                  </button>
+                  <!-- ng-template FORM EDIT CATCHER -->
+                  <ng-template #dialogEditCatcher let-c="close" let-d="dismiss" >
+                      <div class="modal-header">
+                        <h4 class="modal-title">Edit Catcher</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <!-- Edit Catcher form -->
+                        <form #editCatcherForm="ngForm" class="form" id="editCatcherForm" >
+                  
+                            <!-- Catcher Full Name -->
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 ">
+                                  <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control fc-input" id="ec_name" name="ec_name" placeholder="Enter full name" [(ngModel)]="ec_name">
+                                  </div>
+                              </div>
+                            </div>
+                            
+                            <!-- Catcher email -->
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 ">
+                                  <div class="form-group">
+                                    <input type="email" autocomplete="off" class="form-control fc-input" id="ec_email" name="ec_email" placeholder="Enter email" [(ngModel)]="ec_email">
+                                  </div>
+                              </div>
+                            </div>
+                        
+                            <br>
+                        
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 ">
+                                  <div class="form-group ">
+                                    <button type="button" class="form-control button-submit" (click)="c(editCatcherForm)">UPDATE CATCHER</button>
+                                  </div>
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                  </ng-template>
+                  <!-- ./ng-template FORM EDIT CATCHER -->
+                </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="deleteCatcher">
+                <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+                <mat-cell class="duration-cell" *matCellDef="let catcher" (click)="$event.stopPropagation()">
+                    <button type="button" class="button-edit" (click)="confirmDeleteCatcher(confirmDeleteDialog,catcher)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <ng-template #confirmDeleteDialog let-c="close" let-d="dismiss" >
+                      <div class="modal-header">
+                        <h4 class="modal-title">Confirm Delete</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure? <br>Do you want to delete Catcher <strong>{{catcher.name}}</strong></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-light" (click)="c(catcher.id)">Yes</button>
+                        <button type="button" class="btn btn-light" (click)="d('No')">No</button>
+                      </div>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns" class="header-table"></mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator [length]="catchersData.length" [pageSize]="7" [pageSizeOptions]="[2, 10, 25]">
+        </mat-paginator>
+        
+
+    </div>
+  </div>
+
+  
+
+    
+</div>
+
+<script type="text/javascript">
+
+</script>
+  

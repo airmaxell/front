@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Monsterrat;
+    src: url("./assets/font/montserrat_light.ttf");
+}
+
+@font-face {
+    font-family    : 'Monsterrat-Medium';
+    src            : url('./assets/font/montserrat_medium.ttf') format('ttf');
+    font-style     : normal;
+    font-weight    : normal;
+    font-style     : normal;
+    text-rendering : optimizeLegibility;
+}
+
+@font-face {
+    font-family    : 'Monsterrat-Bold';
+    src            : url('./assets/font/montserrat_bold.ttf') format('ttf');
+    font-style     : normal;
+    font-weight    : bold;
+    font-style     : normal;
+    text-rendering : optimizeLegibility;
+}
+
+html {
+    min-height: 100% !important;
+  }
+body {
+    font-family: "Monsterrat-Medium" !important;
+    min-height: 100% !important;
+    background: #556e78;
+    background: -moz-linear-gradient(top, #556e78 0%, #3e0d14 100%);
+    background: -webkit-linear-gradient(top, #556e78 0%,#3e0d14 100%);
+    background: linear-gradient(to bottom, #556e78 0%,#3e0d14 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#556e78', endColorstr='#3e0d14',GradientType=0 );
+    background-attachment: fixed;
+}
+
+::selection {
+    background-color: #ff2e55;
+    color: #e5e1e2;
+}

@@ -1,0 +1,151 @@
+
+@import url("../manage-catchers/manage-catchers.component.scss");
+
+
+/* Anngular notifications */
+.simple-notification-wrapper {
+    z-index: 7000 !important;
+}
+.light-blue-backdrop {
+    background: #556e78;
+    background: -moz-linear-gradient(top, #556e78 0%, #3e0d14 100%);
+    background: -webkit-linear-gradient(top, #556e78 0%,#3e0d14 100%);
+    background: linear-gradient(to bottom, #556e78 0%,#3e0d14 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#556e78', endColorstr='#3e0d14',GradientType=0 );
+    background-attachment: fixed;
+    z-index: 4000;
+}
+.light-blue-backdrop.show {
+    opacity: .9;
+}
+.window-modal {
+    z-index: 4001;
+}
+.window-modal .modal-content {
+    background-color: #fcfcfc;
+    color: #212529;
+}
+.dark-modal .close {
+    color: white;
+}
+/* ./Anngular notifications */
+
+
+
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-align: left;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--color-text-dark);
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: var(--color-bg-gray);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: var(--color-text-dark);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: var(--color-accent);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 13px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+.size-catcher { min-width: 20%;}
+.size-vin { min-width: 20%; }
+.size-sent { min-width: 15%; }
+.size-accepted { min-width: 15%; }
+.size-finished { min-width: 15%; }
+.size-delete { min-width: 5%; }
+.size-edit { min-width: 5%; }
+.size-download { min-width: 5%; }
+
+mat-cell.mat-cell-date-time {
+    line-height: 28px;
+}
+ 
+.textarea-custom {
+    background-color: var(--color-bg-gray);
+    border: none;
+    border-radius: 0.2rem;
+    color: #323235;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+.textarea-custom:focus {
+    background-color: var(--color-bg-gray); 
+}
+
+.textarea-custom::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--color-text-white); 
+    opacity: .8; /* Firefox */
+}
+
+.textarea-custom:focus {
+    box-shadow: none;
+}
+
+.textarea-holder {
+    font-size: 0.8rem;
+    background-color: var(--color-bg-gray);
+}
+
+.textarea-holder .area-heading {
+    border-bottom: 1px solid var(--color-accent);
+    width: 100%;
+    text-align: center;
+}
+
+

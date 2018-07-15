@@ -1,0 +1,397 @@
+<div class="container-fluid content">
+    <simple-notifications [options]="options"></simple-notifications>
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-sm-8 offset-sm-2">
+          <div class="form-group ">
+              <button type="button" class="form-control button-submit" (click)="showDialogAddRequest(dialogAddRequest)" >
+                NEW REQUEST
+              </button>
+          </div>
+      </div>
+    </div>
+    <!-- Modal Form ADD CATCHER -->
+    <ng-template #dialogAddRequest let-c="close" let-d="dismiss" >
+      <div class="modal-header">
+        <h4 class="modal-title">Add Request</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #requestForm="ngForm" (ngSubmit)="sendRequest()" class="form">
+          <!-- VIN number -->
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-12 ">
+                <div class="form-group">
+                  <input type="text" autocomplete="off" class="form-control fc-input input-with-button" id="vin" name="vin" placeholder="Enter VIN number" [(ngModel)]="vin">
+                  <button (click)="validateVin(requestForm.value.vin)" type="button" class="button-inside"></button>
+                </div>
+            </div>
+          </div>
+
+          <!-- Manufacturer & Gearbox type -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="manufacturer" name="manufacturer" placeholder="Manufacturer -" [(ngModel)]="manufacturer"> 
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="gearbox" name="gearbox" placeholder="Gearbox type -" [(ngModel)]="gearbox">
+              </div>
+            </div>
+          </div>
+
+          <!-- Model & Engine capacity -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="model" name="model" placeholder="Model -" [(ngModel)]="model">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="engineCap" name="engineCap" placeholder="Engine capacity -" [(ngModel)]="engineCap">
+              </div>
+            </div>
+          </div>
+
+          <!-- Body type & Engine power -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="bodyType" name="bodyType" placeholder="Body type -" [(ngModel)]="bodyType">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="enginePow" name="enginePow" placeholder="Engine power -" [(ngModel)]="enginePow">
+              </div>
+            </div>
+          </div>
+
+          <!-- Fuel type & Body color -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="fuelType" name="fuelType" placeholder="Fuel type -" [(ngModel)]="fuelType">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="bodyCol" name="bodyCol" placeholder="Body color -" [(ngModel)]="bodyCol">
+              </div>
+            </div>
+          </div>
+
+          <!-- Country of manufacturer & Interior color -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="com" name="com" placeholder="Country of manufacturer -" [(ngModel)]="com">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="text" autocomplete="off" class="form-control fc-input" id="interiorCol" name="interiorCol" placeholder="Interior color -" [(ngModel)]="interiorCol">
+              </div>
+            </div>
+          </div>
+
+          <!-- Choose a Catcher -->
+          <div class="row">
+              <div class="col-lg-8 offset-lg-2 col-md-12 ">
+                <div class="form-group styled-select">
+                  <select class="form-control fc-input pointer" id="catcherId" name="catcherId"  [(ngModel)]="catcherId" >
+                    <option value="" disabled selected>Choose a catcher</option>
+                    <option *ngFor="let cat of this.catchers" value="{{cat.id}}">{{cat.name}}</option>  
+                  </select>
+                  <!-- <button type="button" class="button-inside-select"></button> -->
+                </div>
+            </div>
+          </div>
+
+          <!-- With Background -->
+          <div class="row">
+              <div class="col-lg-8 offset-lg-2 col-md-12 ">
+                <div class="form-group styled-select">
+                  <label class="container"> With Background
+                      <input class="form-control"  type="checkbox" id="withBackground" name="withBackground" value="withBackground" checked [(ngModel)]="withBackground">
+                    <span class="checkmark"></span>
+                  </label>
+                  
+                </div>
+            </div>
+          </div>
+
+          <!-- Include a Message -->
+          <div class="row">
+              <div class="col-lg-12 col-md-12 ">
+                <div class="form-group textarea-holder">
+                  <div class="area-heading">INCLUDE A MESSAGE</div>
+                  <textarea class="textarea-custom form-control " id="requestMessage" name="requestMessage" rows="4" placeholder="Enter your message here..." [(ngModel)]="requestMessage" ></textarea>
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-lg-8 offset-lg-2 col-md-12 ">
+                  <div class="form-group ">
+                    <button type="submit" class="form-control button-submit">SEND REQUEST</button>
+                  </div>
+              </div>
+            </div>
+      
+        </form>
+      </div>
+    </ng-template>
+
+    <br><br>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <input (keyup)="applyFilter($event.target.value)" placeholder="Filter" type="text" autocomplete="off" class="form-control fc-input filter">
+        </div>
+      </div>  
+    <mat-table class="lessons-table mat-elevation-z8 table-condensed table-catchers" [dataSource]="requestData">
+      
+      <!-- Catcher -->
+      <ng-container matColumnDef="catcherName" >
+          <mat-header-cell *matHeaderCellDef class="size-catcher">Catcher</mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-catcher">{{request.catcherName}}</mat-cell>
+      </ng-container>
+
+      <!-- Vin -->
+      <ng-container matColumnDef="vin" >
+          <mat-header-cell *matHeaderCellDef class="size-vin">Vin</mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-vin vin-cell" >{{request.vin}}</mat-cell>
+      </ng-container>
+
+      <!-- Sent -->
+      <ng-container matColumnDef="createdAt" >
+          <mat-header-cell *matHeaderCellDef class="size-sent">Sent</mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-sent mat-cell-date-time">
+            <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+            <br>
+            {{request.createdAt.substr(11,5)}}
+          </mat-cell>
+      </ng-container>
+
+      <!-- Accepted -->
+      <ng-container matColumnDef="acceptedTime" >
+          <mat-header-cell *matHeaderCellDef class="size-accepted">Accepted</mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-accepted">{{request.acceptedTime}}</mat-cell>
+      </ng-container>
+
+      <!-- Finished -->
+      <ng-container matColumnDef="finishTime" >
+          <mat-header-cell *matHeaderCellDef class="size-finished">Finished</mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-finished">{{request.finishTime}}</mat-cell>
+      </ng-container>
+
+      <!-- Delete -->
+      <ng-container matColumnDef="delete" >
+          <mat-header-cell *matHeaderCellDef class="size-delete"></mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-delete" (click)="$event.stopPropagation()">
+            <button type="button" class="button-edit" (click)="deleteRequest(request.id)">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </mat-cell>
+      </ng-container>
+
+      <!-- Edit -->
+      <ng-container matColumnDef="edit" >
+          <mat-header-cell *matHeaderCellDef class="size-edit"></mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-edit" (click)="$event.stopPropagation()">
+            <button type="button" class="button-edit" (click)="editImages(request.id)">
+                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+            </button>
+          </mat-cell>
+      </ng-container>
+
+      <!-- Download -->
+      <ng-container matColumnDef="download" >
+          <mat-header-cell *matHeaderCellDef class="size-download"></mat-header-cell>
+          <mat-cell *matCellDef="let request" class="size-download" (click)="$event.stopPropagation()">
+            <button type="button" class="button-edit" (click)="downloadImages(request.id)">
+                <i class="fa fa-download" aria-hidden="true"></i>
+            </button>
+          </mat-cell>
+      </ng-container>
+
+      <!-- Show header and rows-->
+      <mat-header-row *matHeaderRowDef="displayedColumns" class="header-table"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginator [length]="requestData.length" [pageSize]="7" [pageSizeOptions]="[7, 20, 50]">
+    </mat-paginator>
+
+    <!-- Pending -->
+    <!--
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-holder">
+          <div class="heading-caption">Pending</div>
+          <table class="table-requests">
+            <thead>
+              <tr>
+                <th class="size-catcher">Catcher:</th>
+                <th class="size-vin">Vin:</th>
+                <th class="size-sent">Sent:</th>
+                <th class="size-accepted"> </th>
+                <th class="size-finished"> </th>
+                <th class="size-delete"> </th>
+                <th class="size-edit"> </th>
+                <th class="size-download"> </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let request of this.pendingRequests" class="tr">
+                  <td class="size-catcher"><div class="td-content">{{request.catcherName}}</div></td>
+                  <td class="size-vin"><div class="td-content">{{request.vin}}</div></td>
+                  <td class="size-sent">
+                    <div class="td-content">
+                      <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+                      <br>
+                      {{request.createdAt.substr(11,5)}}
+                    </div>
+                  </td>
+                  <td class="size-accepted">{{request.acceptedTime}}</td>
+                  <td class="size-finished">{{request.finishTime}}</td>
+                  <td class="size-delete"> </td>
+                  <td class="size-edit"> </td>
+                  <td class="size-download"> </td>
+              </tr>
+            </tbody>
+              
+          </table>
+        </div>
+      </div>
+    </div>
+    -->
+    <br> 
+
+    <!-- In Progress -->
+    <!-- 
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="table-holder">
+            <div class="heading-caption">In Progress</div>
+            <table class="table-requests">
+              <thead>
+                <tr>
+                  <th class="size-catcher">Catcher:</th>
+                  <th class="size-vin">Vin:</th>
+                  <th class="size-sent">Sent:</th>
+                  <th class="size-accepted">Accepted:</th>
+                  <th class="size-finished"> </th>
+                  <th class="size-delete"> </th>
+                  <th class="size-edit"> </th>
+                  <th class="size-download"> </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let request of this.inProgressRequests" class="tr">
+                  <td class="size-catcher"><div class="td-content">{{request.catcherName}}</div></td>
+                  <td class="size-vin"><div class="td-content">{{request.vin}}</div></td>
+                  <td class="size-sent">
+                    <div class="td-content">
+                      <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+                      <br>
+                      {{request.createdAt.substr(11,5)}}
+                    </div>
+                  </td>
+                  <td class="size-accepted">{{request.acceptedTime}}</td>
+                  <td class="size-finished">{{request.finishTime}}</td>
+                  <td class="size-delete"> </td>
+                  <td class="size-edit"> </td>
+                  <td class="size-download"> </td>
+                </tr>
+              </tbody>
+                
+            </table>
+          </div>
+        </div>
+      </div>
+      -->
+      <br> 
+
+    <!-- Finished -->
+    <!-- 
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-holder">
+          <div class="heading-caption">Finished</div>
+          <table class="table-requests">
+            <thead>
+              <tr>
+                <th class="size-catcher">Catcher:</th>
+                <th class="size-vin">Vin:</th>
+                <th class="size-sent">Sent:</th>
+                <th class="size-accepted">Accepted:</th>
+                <th class="size-finished">Finished:</th>
+                <th class="size-delete"> </th>
+                <th class="size-edit"> </th>
+                <th class="size-download"> </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let request of this.finishedRequests" class="tr">
+                <td class="size-catcher"><div class="td-content">{{request.catcherName}}</div></td>
+                <td class="size-vin"><div class="td-content">{{request.vin}}</div></td>
+                <td class="size-sent">
+                  <div class="td-content">
+                    <span class="date-wrap">{{request.createdAt.substr(0,10)}}</span>
+                    <br>
+                    {{request.createdAt.substr(11,5)}}
+                  </div>
+                </td>
+                <td class="size-accepted">{{request.acceptedTime}}</td>
+                <td class="size-finished">{{request.finishTime}}</td>
+                <td class="size-delete"><button type="button" class="button-delete" (click)="deleteRequest(request.id)"></button></td>
+                <td class="size-edit"><button type="button" class="button-edit" (click)="editImages(request.id)"></button></td>
+                <td class="size-download"><button type="button" class="button-download" (click)="downloadImages(request.id)"></button></td>
+              </tr>
+
+            </tbody>
+              
+          </table>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <!-- Table of Catchers -->
+    <!-- 
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table-condensed table-catchers">
+          <thead>
+            <tr>
+              <th>CATCHER FULL NAME</th>
+              <th>RESPONDED REQUESTS</th>
+              <th>RESPONSE RATE [0-10]</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let catcher of this.catchers">
+              <td>{{catcher.name}}</td>
+              <td>{{catcher.id}}</td>
+              <td>{{catcher.id}}</td>
+            </tr>
+          </tbody>
+            
+        </table>
+      </div>
+    </div>
+    -->
+
+</div>
+  

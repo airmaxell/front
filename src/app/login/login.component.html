@@ -1,0 +1,38 @@
+<div class="login-page-custom">
+
+	<simple-notifications [options]="options"></simple-notifications>
+	
+	<div class="row">
+		<div class="col-lg-4 offset-lg-4">
+			<img src="../../assets/img/catch_logo.png" width="150px" class="user-avatar" />
+			<h1>Catch Dashboard</h1>
+			<div *ngIf="isError" class="alert alert-danger" role="alert">
+				Bad Email or Password!
+			  </div>
+			<form #loginForm name="loginForm" >
+				<div class="form-content">
+					<div class="form-group">
+						<input  #userEmail ngModel name="userEmail"
+								type="email" 
+								class="form-control input-underline" 
+								id="exampleInputEmail1" 
+								aria-describedby="emailHelp" 
+								placeholder="Enter email"
+								value="user@catch.com"
+								required >
+					</div>
+					<div class="form-group">
+						<input  #userPassword ngModel name="userPassword"
+								type="password" 
+								class="form-control input-underline" 
+								id="exampleInputPassword1" 
+								placeholder="Password"
+								value="qwer1234"
+								required>
+					</div>
+				</div>
+				<button type="button" class="btn rounded-btn" (click)="OnSubmit(userEmail.value, userPassword.value)" >Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
